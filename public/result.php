@@ -10,6 +10,12 @@ include_once("../src/db/DB.php");
 
 $db = new DB();
 
+/**
+ * get user id from request header,
+ * get user object from database table(users),
+ * get user result from database table (results)
+ * get number of questions in the test from database.
+ */
 $user_id = $_GET['user_id'];
 $user_query = "select * from users where users.id = {$user_id}";
 $user_set = $db->getData($user_query);
@@ -21,8 +27,7 @@ $questions_count_query = "SELECT COUNT(*) as result
                             FROM questions
                             JOIN quizzes on questions.quiz_id = quizzes.id
                             JOIN user_quiz on quizzes.id = user_quiz.quiz_id 
-                            AND user_quiz.user_id = 46";
-
+                            AND user_quiz.user_id = $user_id";
 $questions_count_set = $db->getData($questions_count_query);
 $questions_count = $questions_count_set[0]['result'];
 $result = $result_set[0]['result'];
@@ -39,8 +44,10 @@ $result = $result_set[0]['result'];
 
 <html>
 <head>
-    <title>Home</title>
-
+    <title>Result</title>
+    <!--
+    cdn for materialize css and jquery,
+    -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">

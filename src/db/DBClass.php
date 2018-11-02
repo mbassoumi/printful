@@ -12,7 +12,7 @@ class DBClass
     private $servername = "localhost";
     private $username = "root";
     private $password = '';
-    private $db_name = 'printful';
+    private $db_name = 'printful_2';
 
     protected $db_connection;
 

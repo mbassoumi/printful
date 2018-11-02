@@ -2,14 +2,15 @@
 
 include_once("../src/db/DB.php");
 include_once("../src/controllers/QuizController.php");
-//include_once ("../public/quiz.php");
 
 
 $requestUrl = strtolower($_SERVER['REQUEST_URI']);
 
-//echo $requestUrl;
 
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+    /**
+     * handle ajax request functions,
+     */
     switch ($requestUrl) {
         case '/save-home' :
             $controller = new QuizController();
@@ -36,7 +37,9 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
     <html>
     <head>
         <title>Home</title>
-
+        <!--
+        cdn for materialize css and jquery,
+        -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -115,6 +118,9 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
                     success: function (response) {
                         console.log('Submission was successful.');
                         console.log(response);
+                        /**
+                         * redirect to quiz page
+                         */
                         window.location.href = response;
                         // $('#options_div').html(response);
                     },

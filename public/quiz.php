@@ -14,6 +14,10 @@ $get_quiz_query = "select * from quizzes where id= {$_GET['quiz_id']}";
 
 $user = $db->getData($get_user_query);
 
+/**
+ * get quiz questions
+ * and get all options for each question in one query.
+ */
 $questions_query = "SELECT 
                     questions.id as question_id,
                     questions.`name` as question_name, 
@@ -30,6 +34,9 @@ $user_id = $_GET['user_id'];
 $questions = $db->getData($questions_query);
 
 $questions_array = [];
+/**
+ * simplify the result set,
+ */
 foreach ($questions as $question) {
     $questions_array[$question['question_id']]['name'] = $question['question_name'];
     $questions_array[$question['question_id']]['options'][$question['option_id']]['name'] = $question['option_name'];
@@ -41,6 +48,11 @@ foreach ($questions as $question) {
 
 <html>
 <head>
+    <title>Quiz</title>
+
+    <!--
+    cdn for materialize css and jquery,
+    -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -106,6 +118,9 @@ foreach ($questions as $question) {
 
         $("body").on('click', '.option_value', function (e) {
             e.preventDefault();
+            /**
+             * add blue color the selected option using jquery,
+             */
             $('.option_value').css('background', 'white');
             value_button = $(this);
             value_button.css('background', '#29b6f6');
@@ -146,6 +161,9 @@ foreach ($questions as $question) {
                     console.log('completed');
                 },
                 success: function (response) {
+                    /**
+                     * after ajax request success, hide the current question and show the next one without refresh the page,
+                     */
                     console.log('Submission was successful.');
                     console.log(response)
                     value_button = null;
@@ -156,6 +174,9 @@ foreach ($questions as $question) {
                     console.log(current_div);
                     current_div.show();
                     if (is_last){
+                        /**
+                         * redirect to result page,
+                         */
                         window.location.href = response;
                     }
                     // $('#options_div').html(response);
