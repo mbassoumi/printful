@@ -1,14 +1,9 @@
 # printful
 printful test
 
-#run on mac:
-1- go to project folder in your terminal
-2- write (valet link)
-3- you can access the project by typing project-folder-name.test in your browser
-
-#run on window:
+#run
 1- go to public folder in your cmd
-2- write php -s 127.0.0.1:8000
+2- write php -S 127.0.0.1:8000
 3- you can access the project by typing localhost:8000 in your browser
 
 #database:
