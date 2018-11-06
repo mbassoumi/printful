@@ -43,6 +43,8 @@ foreach ($questions as $question) {
     $questions_array[$question['question_id']]['options'][$question['option_id']]['mark'] = $question['option_mark'];
 
 }
+$questions_count = count($questions_array);
+
 
 ?>
 
@@ -87,6 +89,10 @@ foreach ($questions as $question) {
             }
             echo "</div>";
             echo "<br>";
+            echo "<div id='progress-bar'>";
+            echo "<div id='progress-bar-status' style='width:".((($j)/$questions_count)*100)."%'></div>";
+            echo "</div>";
+            echo "<br>";
             echo "<div class='col s6'>";
             if ($j + 1 == $questions_length) {
                 echo "<button class='next btn waves-effect waves-light deep-purple grey darken-2' data-question_id='$question_id' data-is_last='true' style='width: 50%'>SUBMIT</button>";
@@ -102,6 +108,20 @@ foreach ($questions as $question) {
 </div>
 </body>
 </html>
+
+<style>
+    #progress-bar {
+        width: 200px;
+        border: 2px solid #000;
+        margin: 0 auto 20px auto;
+    }
+
+    #progress-bar div {
+        height: 20px;
+        background: gray;
+    }
+</style>
+
 <script>
 
 
@@ -139,9 +159,9 @@ foreach ($questions as $question) {
             let question_id = next_button.data('question_id');
             let is_last = next_button.data('is_last');
             let url = '';
-            if (is_last===true) {
+            if (is_last === true) {
                 url = '/submit-quiz'
-            }else {
+            } else {
                 url = '/save-answer';
             }
 
@@ -173,7 +193,7 @@ foreach ($questions as $question) {
                     current_div = $("#div_" + i);
                     console.log(current_div);
                     current_div.show();
-                    if (is_last){
+                    if (is_last) {
                         /**
                          * redirect to result page,
                          */
