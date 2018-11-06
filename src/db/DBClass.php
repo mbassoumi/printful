@@ -12,7 +12,7 @@ class DBClass
     private $servername = "localhost";
     private $username = "root";
     private $password = '';
-    private $db_name = 'printful_2';
+    private $db_name = 'printful';
 
     protected $db_connection;
 
@@ -23,7 +23,6 @@ class DBClass
         if ($this->db_connection->connect_error) {
             die("Connection failed: " . $this->db_connection->connect_error);
         }
-
         return $this->db_connection;
     }
 

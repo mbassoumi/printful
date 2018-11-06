@@ -6,7 +6,6 @@
  * Time: 21:56
  */
 
-include_once("../src/db/DB.php");
 
 class QuizController
 {
@@ -34,7 +33,7 @@ class QuizController
         $save_user_quiz_query = "insert into user_quiz (user_id, quiz_id) values ($user_id, $quiz_id)";
         $db->execute($save_user_quiz_query);
 
-        $redirect_url = "/public/quiz.php?user_id={$user_id}&quiz_id={$quiz_id}";
+        $redirect_url = "/quiz?user_id={$user_id}&quiz_id={$quiz_id}";
         json_encode($redirect_url);
         echo $redirect_url;
     }
@@ -57,7 +56,7 @@ class QuizController
         $save_result_query = "insert into results (user_id, quiz_id, result) values ($user_id, $quiz_id, {$result[0]['result']})";
 
         $db->execute($save_result_query);
-        $redirect_url = "/public/result.php?user_id={$user_id}";
+        $redirect_url = "/result?user_id={$user_id}";
         json_encode($redirect_url);
         echo $redirect_url;
     }

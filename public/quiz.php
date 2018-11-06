@@ -7,7 +7,6 @@
  */
 
 include_once("../src/db/DB.php");
-
 $db = new DB();
 $get_user_query = "select * from users where id = {$_GET['user_id']}";
 $get_quiz_query = "select * from quizzes where id= {$_GET['quiz_id']}";
